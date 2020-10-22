@@ -15,6 +15,15 @@ module.exports = class User extends Sequelize.Model {
             password: {
                 type: Sequelize.STRING(100),
                 allowNull: false
+            },
+            provider: {
+                type: Sequelize.STRING(10),
+                allowNull: false,
+                defaultValue: 'local'
+            },
+            snsId: {
+                type: Sequelize.STRING(20),
+                allowNull: false
             }
         }, {
             sequelize,
@@ -28,6 +37,6 @@ module.exports = class User extends Sequelize.Model {
         });
     }
     static associate(db) {
-        
+        db.User.hasMany(db.Zone);
     }
-}
+};
