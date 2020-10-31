@@ -7,6 +7,10 @@ const { Passport } = require('passport');
 
 const router = express.Router();
 
+router.get('/join', isNotLoggedIn, async (req, res, next) => {
+    res.render('join', {title: '회원가입'});
+})
+
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
     const { email, nickname, password } = req.body;
     try {

@@ -1,21 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="timeline">
-    <form id="join-form" action="/auth/join" method="post">
-        <div class="input-group">
-            <label for="join-email">이메일</label>
-            <input id="join-email" type="email" name="email"></div>
-        <div class="input-group">
-            <label for="join-nick">닉네임</label>
-            <input id="join-nick" type="text" name="nickname"></div>
-        <div class="input-group">
-            <label for="join-password">비밀번호</label>
-            <input id="join-password" type="password" name="password">
-        </div>
-        <button id="join-btn" type="submit" class="btn">회원가입</button>
-    </form>
-</div>
+<form action="/auth/join" method="POST" style="margin-left: 30em; margin-right: 30em; margin-top: 10em;">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Nickname</label>
+      <input type="text" name="nickname" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+    <button type="submit" name="password" class="btn btn-primary">Submit</button>
+  </form>
 {% endblock %}
 
 {% block script %}
