@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
         const zones = await Zone.findAll({
             include: {
                 model: User,
-                attributes: ['id', 'nick']
+                attributes: ['id', 'nickname']
             },
             order: [['createdAt', 'DESC']]
         });
