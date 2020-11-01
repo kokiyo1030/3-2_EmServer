@@ -7,7 +7,10 @@ const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const passport = require('passport');
 const { static } = require('express');
+const mysql = require('mysql2');
+const config = require('./config/config.json');
 
+const app = express();
 dotenv.config();
 const pageRouter = require('./routes/page');
 const userRouter = require('./routes/user');
@@ -15,7 +18,6 @@ const authRouter = require('./routes/auth');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
-const app = express();
 passportConfig();
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'html');
@@ -68,6 +70,17 @@ app.use((err, req, res, next) => {
     res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
     res.render('error');
 });
+
+var pool = mysql.createPool({
+    host: config.development.host,
+    user: config.development.username,
+    password: config.development.password,
+    database: config.development.database,
+    connectionLimit: 20,
+    waitForConnections: false
+});
+
+const infoRouter = require('./routes/info')(app, pool);
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기중');
