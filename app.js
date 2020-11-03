@@ -6,7 +6,7 @@ const session = require('express-session');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const passport = require('passport');
-const { static } = require('express');
+//const { static } = require('express');
 const mysql = require('mysql2');
 const config = require('./config/config.json');
 
