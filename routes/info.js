@@ -23,7 +23,7 @@ module.exports = function(app, pool) {
     });
 
     // >> POST
-    app.post("/postgas", function (req, res) {
+    app.post("/postinfo", function (req, res) {
         var result = {};
         var sensor1 = null;
         var sensor2 = null;
@@ -82,7 +82,7 @@ module.exports = function(app, pool) {
     });
 
     // >> GET
-    app.get("/getgas", function (req, res) {
+    app.get("/getinfo", function (req, res) {
         var result = {};
         // db에 연결하여 sql 수행
         pool.getConnection(function (err, conn) {
@@ -98,4 +98,17 @@ module.exports = function(app, pool) {
             });
         });
     });
-};
+}
+
+var returnResult = function (err, res) {
+    // 결과를 눈으로 보기 쉽게하기 위해 result 객체 생성
+    var result = {};
+    if (err) {
+        res.status(400);
+        result.message = err.stack;
+    } else {
+        res.status(200);
+        result.message = "Success";
+    }
+    return result;
+}
