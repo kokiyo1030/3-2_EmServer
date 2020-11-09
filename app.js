@@ -34,7 +34,7 @@ sequelize.sync({ force: false })
         console.error(err);
     });
 
-if (process.env.NODE_ENV === 'prodection') {
+if (process.env.NODE_ENV === 'production') {
     app.use(morgan('combined'));
 } else {
     app.use(morgan('dev'));

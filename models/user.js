@@ -37,6 +37,8 @@ module.exports = class User extends Sequelize.Model {
         });
     }
     static associate(db) {
-        db.User.hasMany(db.Zone);
+        db.User.belongsToMany(db.Zone, { 
+            through: 'UserToZone'
+        });
     }
 };

@@ -29,7 +29,7 @@ module.exports = class Zone extends Sequelize.Model {
             }
         }, {
             sequelize,
-            timestamps: true,
+            timestamps: false,
             underscored: false,
             modelName: 'Zone',
             tableName: 'zones',
@@ -39,6 +39,8 @@ module.exports = class Zone extends Sequelize.Model {
         });
     }
     static associate(db) {
-        db.Zone.belongsTo(db.User);
+        db.Zone.belongsToMany(db.User, { 
+            through: 'UserToZone'
+        });
     }
 };
