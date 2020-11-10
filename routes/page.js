@@ -40,4 +40,8 @@ router.get('/tables', (req, res) => {
     res.render('tables', {title : '테이블 정보' });
 });
 
+router.get('/charts', (req, res) => {
+    res.render('charts', {title: '차트 정보' });
+});
+
 module.exports = router;
