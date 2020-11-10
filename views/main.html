@@ -17,6 +17,7 @@
         };
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    map.setZoomable(false);  
 
     // 지도에 마커를 표시합니다 
     var marker = new kakao.maps.Marker({
