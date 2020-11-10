@@ -36,4 +36,8 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/tables', (req, res) => {
+    res.render('tables', {title : '테이블 정보' });
+});
+
 module.exports = router;
