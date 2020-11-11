@@ -88,4 +88,12 @@ router.get('/register', (req, res) => {
     res.render('left_nav/pages/register', { title: 'register' });
 });
 
+router.get('/map1', (req, res) => {
+    res.render('map1', { title: '중부리 1축사' });
+});
+
+router.get('/map2', (req, res) => {
+    res.render('map2', { title: '중부리 2축사' });
+});
+
 module.exports = router;
