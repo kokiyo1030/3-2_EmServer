@@ -1,8 +1,8 @@
 // const express = require('express');
 // const Sensor = require('../models/zone');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
-module.exports = function(app, pool) {
+module.exports = function (app, pool) {
 
     app.get("/", function (req, res) {
         var result = {};
@@ -17,7 +17,9 @@ module.exports = function(app, pool) {
                 conn.release();
                 result.status = res.statusCode;
                 JSON.stringify(result);
-                res.render('index', {info : rows});
+                res.render('index', {
+                    info: rows
+                });
             });
         });
     });
@@ -98,6 +100,38 @@ module.exports = function(app, pool) {
             });
         });
     });
+
+    app.post("/postinfo", function (req, res) {
+        var result = {};
+        var i = 0;
+        async.waterfall([
+                function (callback) {
+                    if (i < 0) {
+                        callback(new Error("wrong i value"));
+                    } else {
+                        pool.getConnection(function (err, conn) {
+                            var sql = "CREATE table 'zones" + i + "(id int(11) not null auto_increment,"
+                            console.log("SQL: " + sql);
+                            conn.query(sql, function (err) {
+                                if (err) {
+                                    conn.release();
+                                    callback(err);
+                                } else {
+                                    conn.release();
+                                    callback();
+                                }
+                            });
+                        });
+                    }
+                }
+            ],
+            function (err) {
+                result = returnResult(err, res)
+                result.status = res.statusCode;
+                res.send(result);
+            });
+    });
+
 }
 
 var returnResult = function (err, res) {
