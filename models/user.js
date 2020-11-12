@@ -23,7 +23,7 @@ module.exports = class User extends Sequelize.Model {
             },
             snsId: {
                 type: Sequelize.STRING(20),
-                allowNull: false
+                allowNull: true
             }
         }, {
             sequelize,

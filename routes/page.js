@@ -23,8 +23,7 @@ router.get('/', async (req, res, next) => {
             include: {
                 model: User,
                 attributes: ['id', 'nickname']
-            },
-            order: [['createdAt', 'DESC']]
+            }
         });
         res.render('main', {
             title: '축사 관리',
@@ -82,10 +81,6 @@ router.get('/forgot-password', (req, res) => {
 
 router.get('/login', (req, res) => {
     res.render('left_nav/pages/login', { title: 'login' });
-});
-
-router.get('/register', (req, res) => {
-    res.render('left_nav/pages/register', { title: 'register' });
 });
 
 router.get('/map1', (req, res) => {

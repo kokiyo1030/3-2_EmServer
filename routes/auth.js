@@ -7,11 +7,11 @@ const { Passport } = require('passport');
 
 const router = express.Router();
 
-router.get('/join', isNotLoggedIn, async (req, res, next) => {
-    res.render('join', {title: '회원가입'});
+router.get('/register', isNotLoggedIn, async (req, res, next) => {
+    res.render('left_nav/pages/register', {title: '회원가입'});
 });
 
-router.post('/join', isNotLoggedIn, async (req, res, next) => {
+router.post('/register', isNotLoggedIn, async (req, res, next) => {
     const { email, nickname, password } = req.body;
     try {
         const exUser = await User.findOne({ where: { email } });
@@ -24,7 +24,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
             nickname,
             password: hash
         });
-        return res.redirect('/');
+        return res.redirect('/login');
     } catch (error) {
         console.error(error);
         return next(error);
