@@ -14,6 +14,7 @@
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
+  <link rel="shortcut icon" href="/img/farm.png" type="image/x-icon">
 
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
@@ -32,12 +33,12 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+      <div class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
         <div class="sidebar-brand-text mx-3">스마트 축사</div>
-      </a>
+      </div>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
@@ -134,6 +135,22 @@
           <span>한눈에 보기</span></a>
       </li>
 
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMap" aria-expanded="false"
+          aria-controls="collapseMap">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>축사 바로 이동</span>
+        </a>
+        <div id="collapseMap" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/map1">중부리 1축사</a>
+            <a class="collapse-item" href="/map2">중부리 2축사</a>
+            <a class="collapse-item" href="/map1">중부리 3축사</a>
+          </div>
+        </div>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -160,17 +177,7 @@
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+          <h2 style="margin-top: 10px;">스마트 축사 악취관리 시스템</h2>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -218,15 +225,6 @@
         <!-- End of Topbar -->
         {% block content %}
         {% endblock %}
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>2020 CCIT 축사 관리 시스템</span>
-            </div>
-          </div>
-        </footer>
-        <!-- End of Footer -->
 
       </div>
       <!-- End of Content Wrapper -->
