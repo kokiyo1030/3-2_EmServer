@@ -79,10 +79,6 @@ router.get('/forgot-password', (req, res) => {
     res.render('left_nav/pages/forgot-password', { title: 'forgotPassword' });
 });
 
-router.get('/login', (req, res) => {
-    res.render('left_nav/pages/login', { title: 'login' });
-});
-
 router.get('/map1', (req, res) => {
     res.render('map1', { title: '중부리 1축사' });
 });

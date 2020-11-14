@@ -17,7 +17,7 @@ module.exports = () => {
             }]
         })
         .then(user => done(null, user))
-        .catch(urr => done(err));
+        .catch(err => done(err));
     });
 
     local();

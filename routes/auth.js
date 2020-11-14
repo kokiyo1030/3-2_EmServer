@@ -16,7 +16,7 @@ router.post('/register', isNotLoggedIn, async (req, res, next) => {
     try {
         const exUser = await User.findOne({ where: { email } });
         if (exUser) {
-            return res.redirect('/join?error=exist');
+            return res.redirect('/register');
         }
         const hash = await bcrypt.hash(password, 12);
         await User.create({
@@ -30,6 +30,10 @@ router.post('/register', isNotLoggedIn, async (req, res, next) => {
         return next(error);
     }
 });
+
+router.get('/login', isNotLoggedIn, async(req, res, next) => {
+    res.render('left_nav/pages/login', { title: '로그인' });
+})
 
 router.post('/login', isNotLoggedIn, (req, res, next) => {
     passport.authenticate('local', (authError, user, info) => {
