@@ -16,7 +16,7 @@ router.post('/register', isNotLoggedIn, async (req, res, next) => {
     try {
         const exUser = await User.findOne({ where: { email } });
         if (exUser) {
-            return res.redirect('/register');
+            return res.redirect('/auth/register');
         }
         const hash = await bcrypt.hash(password, 12);
         await User.create({
@@ -24,7 +24,7 @@ router.post('/register', isNotLoggedIn, async (req, res, next) => {
             nickname,
             password: hash
         });
-        return res.redirect('/login');
+        return res.redirect('/auth/login');
     } catch (error) {
         console.error(error);
         return next(error);
@@ -33,7 +33,7 @@ router.post('/register', isNotLoggedIn, async (req, res, next) => {
 
 router.get('/login', isNotLoggedIn, async(req, res, next) => {
     res.render('left_nav/pages/login', { title: '로그인' });
-})
+});
 
 router.post('/login', isNotLoggedIn, (req, res, next) => {
     passport.authenticate('local', (authError, user, info) => {
@@ -53,6 +53,31 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         });
     })(req, res, next);
 });
+
+// router.post('/login',
+//     function (req, res, next) {
+//         var errors = {};
+//         var isValid = true;
+
+//         if (!req.body.username) {
+//             isValid = false;
+//             errors.username = '아이디를 입력해주세요';
+//         }
+//         if (!req.body.password) {
+//             isValid = false;
+//             errors.password = '비밀번호를 입력해주세요';
+//         }
+
+//         if (isValid) {
+//             next();
+//         } else {
+//             res.redirect('/auth/login');
+//         }
+//     },
+//     passport.authenticate('local', {
+//         successRedirect: '/',
+//         failureRedirect: '/auth/login'
+//     }));
 
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
