@@ -155,6 +155,19 @@
         </div>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCam" aria-expanded="true"
+          aria-controls="collapseMap">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>축사 캠으로 이동</span>
+        </a>
+        <div id="collapseCam" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="http://192.168.0.45:81/stream">중부리 1축사</a>
+          </div>
+        </div>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -198,10 +211,8 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                {% if user and user.id %}
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ '안녕하세요! ' + user.nickname + '님' }}</span>
-                <img class="img-profile rounded-circle" src="img/호화구의술.jpg">
-                {% endif %}
+                {% block profile %}
+                {% endblock %}
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

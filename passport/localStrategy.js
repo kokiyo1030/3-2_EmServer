@@ -3,11 +3,13 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
+const { session } = require('passport');
 
 module.exports = () => {
     passport.use(new LocalStrategy({
         usernameField: 'email',
-        passwordField: 'password'
+        passwordField: 'password',
+        session: true
     }, async (email, password, done) => {
         try {
             const exUser = await User.findOne({ where: { email } });

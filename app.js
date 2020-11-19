@@ -7,7 +7,7 @@ const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const passport = require('passport');
 //const { static } = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const config = require('./config/config.json');
 
 const app = express();
@@ -60,7 +60,6 @@ app.use(passport.session());
 app.use('/', pageRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
-app.use('/info', infoRouter);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다`);
@@ -74,16 +73,16 @@ app.use((err, req, res, next) => {
     res.render('error');
 });
 
-// var pool = mysql.createPool({
-//     host: config.development.host,
-//     user: config.development.username,
-//     password: config.development.password,
-//     database: config.development.database,
-//     connectionLimit: 20,
-//     waitForConnections: false
-// });
+var pool = mysql.createPool({
+    host: config.development.host,
+    user: config.development.username,
+    password: config.development.password,
+    database: config.development.database,
+    connectionLimit: 20,
+    waitForConnections: false
+});
 
-// const infoRouter = require('./routes/info')(app, pool);
+const routes = require('./routes/info')(app, pool);
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기중');

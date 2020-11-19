@@ -13,25 +13,36 @@ router.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile', { title: '내 정보' });
 });
 
-router.get('/join', isNotLoggedIn, (req, res) => {
-    res.render('join', { title: '회원가입' });
-});
-
 router.get('/', async (req, res, next) => {
     try {
-        const zones = await Zone.findAll({
-            include: {
-                model: User,
-                attributes: ['id', 'nickname']
-            }
-        });
+        // const users = await User.findAll({
+        //     include: {
+        //         model: User,
+        //         attributes: ['email', 'nickname']
+        //     }
+        // });
         res.render('main', {
             title: '축사 관리',
-            zones: zones
+            // user: user
+            // zones: zones
         });
     } catch (err) {
         console.error(err);
         next(err);
+    }
+});
+
+router.post('/', async (req, res, next) => {
+    try {
+        const user = await User.findOne({ where: {email: req.user.email } });
+        if (user) {
+            res.render('main', { user: user });
+        } else {
+            res.status(404).send('no user');
+        }
+    } catch (error) {
+        console.error(error);
+        next(error);
     }
 });
 
