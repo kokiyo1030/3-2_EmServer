@@ -58,6 +58,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', pageRouter);
+app.use('/info', infoRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
 
@@ -73,16 +74,17 @@ app.use((err, req, res, next) => {
     res.render('error');
 });
 
-var pool = mysql.createPool({
-    host: config.development.host,
-    user: config.development.username,
-    password: config.development.password,
-    database: config.development.database,
-    connectionLimit: 20,
-    waitForConnections: false
-});
+// var pool = mysql.createPool({
+//     host: config.development.host,
+//     user: config.development.username,
+//     password: config.development.password,
+//     database: config.development.database,
+//     connectionLimit: 20,
+//     waitForConnections: false
+// });
 
-const routes = require('./routes/info')(app, pool);
+// const infoRouter = require('./routes/info')(app, pool);
+// app.use('/info', infoRouter);
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기중');

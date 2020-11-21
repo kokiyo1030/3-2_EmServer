@@ -3,27 +3,15 @@ const Sequelize = require('sequelize');
 module.exports = class Zone extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
-            sensor1: {
+            VRL: {
                 type: Sequelize.FLOAT(10),
                 allowNull: false
             },
-            sensor2: {
+            ppm: {
                 type: Sequelize.FLOAT(10),
                 allowNull: false
             },
-            sensor3: {
-                type: Sequelize.FLOAT(10),
-                allowNull: false
-            },
-            sensor4: {
-                type: Sequelize.FLOAT(10),
-                allowNull: false
-            },
-            sensor5: {
-                type: Sequelize.FLOAT(10),
-                allowNull: false
-            },
-            sensor6: {
+            Mppm: {
                 type: Sequelize.FLOAT(10),
                 allowNull: false
             }
