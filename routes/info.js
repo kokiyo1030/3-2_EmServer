@@ -1,6 +1,5 @@
 const express = require('express');
 const Sensor = require('../models/zone');
-const mysql = require('mysql2');
 
 const router = express.Router();
 
