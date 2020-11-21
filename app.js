@@ -74,18 +74,6 @@ app.use((err, req, res, next) => {
     res.render('error');
 });
 
-// var pool = mysql.createPool({
-//     host: config.development.host,
-//     user: config.development.username,
-//     password: config.development.password,
-//     database: config.development.database,
-//     connectionLimit: 20,
-//     waitForConnections: false
-// });
-
-// const infoRouter = require('./routes/info')(app, pool);
-// app.use('/info', infoRouter);
-
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기중');
 });
