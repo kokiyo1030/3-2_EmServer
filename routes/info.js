@@ -28,7 +28,6 @@ router.post('/postinfo', (req, res, next) => {
         })
         .then(result => {
             res.status(201).json(result);
-            console.log("SQL: " + result);
         })
         .catch(err => {
             next(err);
