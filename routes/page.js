@@ -36,7 +36,7 @@ router.post('/', async (req, res, next) => {
     try {
         const user = await User.findOne({ where: {email: req.user.email } });
         if (user) {
-            res.render('main', { user: user });
+            res.render('layout', { user: user });
         } else {
             res.status(404).send('no user');
         }

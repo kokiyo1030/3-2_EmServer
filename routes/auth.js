@@ -54,31 +54,6 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
     })(req, res, next);
 });
 
-// router.post('/login',
-//     function (req, res, next) {
-//         var errors = {};
-//         var isValid = true;
-
-//         if (!req.body.username) {
-//             isValid = false;
-//             errors.username = '아이디를 입력해주세요';
-//         }
-//         if (!req.body.password) {
-//             isValid = false;
-//             errors.password = '비밀번호를 입력해주세요';
-//         }
-
-//         if (isValid) {
-//             next();
-//         } else {
-//             res.redirect('/auth/login');
-//         }
-//     },
-//     passport.authenticate('local', {
-//         successRedirect: '/',
-//         failureRedirect: '/auth/login'
-//     }));
-
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
     req.session.destroy();

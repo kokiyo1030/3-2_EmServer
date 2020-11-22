@@ -1,10 +1,4 @@
 {% extends 'layout.html' %}
-{% block profile %}
-{% if user %}
-<span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ '안녕하세요! ' + user.nickname + '님!' }}</span>
-<img class="img-profile rounded-circle" src="img/호화구의술.jpg">
-{% endif %}
-{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="/css/map.css">
 <div class="container-fluid">
