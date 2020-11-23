@@ -14,6 +14,10 @@ module.exports = class Zone extends Sequelize.Model {
             Mppm: {
                 type: Sequelize.FLOAT(10),
                 allowNull: false
+            },
+            CreatedAt: {
+                type: Sequelize.DATEONLY,
+                allowNull: false
             }
         }, {
             sequelize,
