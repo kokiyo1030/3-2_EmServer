@@ -6,9 +6,6 @@ const session = require('express-session');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const passport = require('passport');
-//const { static } = require('express');
-const mysql = require('mysql');
-const config = require('./config/config.json');
 
 const app = express();
 dotenv.config();
@@ -18,7 +15,7 @@ const authRouter = require('./routes/auth');
 const infoRouter = require('./routes/info');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
-const { info } = require('console');
+// const { info } = require('console');
 
 passportConfig();
 app.set('port', process.env.PORT || 3000);
