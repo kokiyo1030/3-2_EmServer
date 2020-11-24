@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="chart-area">
                         <div id="stream-container" class="image-container">
-                            <img id="stream" src="http://192.168.0.46:81/stream">
+                            <img id="stream" src="http://192.168.0.12:81/stream">
                         </div>
                     </div>
                 </div>
@@ -37,13 +37,17 @@
                     <h6 class="m-0 font-weight-bold text-primary">버튼 조작해 주세영</h6>
                 </div>
                 <div class="card-body">
-                    <p>버튼 조작해줘잉</p>
-                    <div class="my-2"></div>
                     <a href="#" class="btn btn-success btn-icon-split btn-lg">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
                         </span>
                         <span class="text">EM용액 뿌리기</span>
+                    </a>
+                    <a href="#" class="btn btn-success btn-icon-split btn-lg" onclick="calculate()">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">노티테스트</span>
                     </a>
                     <div class="my-2"></div>
                     <a href="#" class="btn btn-danger btn-icon-split btn-lg">
@@ -115,4 +119,35 @@
     <!-- Page level custom scripts -->
     <script src="/js/demo/chart-area-demo.js"></script>
     <script src="/js/demo/chart-pie-demo.js"></script>
+
+    <!-- 노티 스크립트 -->
+    <script type="text/javascript">
+        window.onload = function () {
+            if (window.Notification) {
+                Notification.requestPermission();
+            }
+        }
+ 
+        function calculate() {
+            setTimeout(function () {
+                notify();
+            }, 500);
+        }
+ 
+        function notify() {
+            if (Notification.permission !== 'granted') {
+                alert('notification is disabled');
+            }
+            else {
+                var notification = new Notification('축사에서 악취가 나요!!', {
+                    icon: '/img/farm.png',
+                    body: '1번축사에서 악취가 납니다',
+                });
+ 
+                notification.onclick = function () {
+                    window.open('http://192.168.0.8:3000/map1');
+                };
+            }
+        }
+    </script>
     {% endblock %}

@@ -8,7 +8,7 @@ router.get('/getinfo', async (req, res, next) => {
         const sensor = await Sensor.findAll({});
         res.render('map1', {
             title: '내 축사',
-            info: sensor
+            sensor: sensor
         });
     } catch (error) {
         console.error(error);
