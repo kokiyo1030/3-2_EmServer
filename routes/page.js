@@ -90,8 +90,21 @@ router.get('/forgot-password', (req, res) => {
     res.render('left_nav/pages/forgot-password', { title: 'forgotPassword' });
 });
 
-router.get('/map1', (req, res) => {
-    res.render('map1', { title: '중부리 1축사' });
+router.get('/map1', async (req, res, next) => {
+    try {
+        const sensor = await Zone.findAll({
+            where: {
+                CreatedAt: Date.now()
+            }
+        });
+        res.render('map1', {
+            title: '내 축사',
+            sensor: sensor
+        });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 });
 
 router.get('/map2', (req, res) => {

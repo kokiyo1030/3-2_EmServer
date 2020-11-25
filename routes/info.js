@@ -3,19 +3,6 @@ const Sensor = require('../models/zone');
 
 const router = express.Router();
 
-router.get('/getinfo', async (req, res, next) => {
-    try {
-        const sensor = await Sensor.findAll({});
-        res.render('map1', {
-            title: '내 축사',
-            sensor: sensor
-        });
-    } catch (error) {
-        console.error(error);
-        next(error);
-    }
-});
-
 router.post('/postinfo', (req, res, next) => {
     const VRL = req.body.VRL;
     const ppm = req.body.ppm;
