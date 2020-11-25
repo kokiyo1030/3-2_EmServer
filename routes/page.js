@@ -97,9 +97,25 @@ router.get('/map1', async (req, res, next) => {
                 CreatedAt: Date.now()
             }
         });
+        const count = await Zone.count({
+            where: {
+                CreatedAt: Date.now()
+            }
+        })
+        for(i=0; i<count; i++) {
+            var ppm = 0;
+            var Mppm = 0;
+            var ppmResult = 0;
+            var MppmResult = 0;
+            ppm += sensor[i].ppm;
+            Mppm += sensor[i].Mppm;
+            ppmResult = ppm / count + 1;
+            MppmResult = Mppm / count + 1;
+        }
         res.render('map1', {
             title: '내 축사',
-            sensor: sensor
+            ppm: ppmResult,
+            Mppm : MppmResult
         });
     } catch (error) {
         console.error(error);
