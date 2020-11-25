@@ -193,6 +193,8 @@
             <i class="fa fa-bars"></i>
           </button>
 
+          <button id="enable">알림 허용</button>
+
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
@@ -205,13 +207,6 @@
               </div>
             </div>
           </form>
-
-          <a href="#" class="btn btn-success btn-icon-split btn-lg" onclick="notifyMe()">
-            <span class="icon text-white-50">
-              <i class="fas fa-check"></i>
-            </span>
-            <span class="text">알림 허용</span>
-          </a>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -304,42 +299,41 @@
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
 
-    <script type="text/javascript">
+    <script>
       function askNotificationPermission() {
         // 권한을 실제로 요구하는 함수
         function handlePermission(permission) {
           // 사용자의 응답에 관계 없이 크롬이 정보를 저장할 수 있도록 함
-          if (!('permission' in Notification)) {
+          if(!('permission' in Notification)) {
             Notification.permission = permission;
           }
-
+      
           // 사용자 응답에 따라 단추를 보이거나 숨기도록 설정
-          if (Notification.permission === 'denied' || Notification.permission === 'default') {
+          if(Notification.permission === 'denied' || Notification.permission === 'default') {
             notificationBtn.style.display = 'block';
           } else {
             notificationBtn.style.display = 'none';
           }
         }
-
+      
         // 브라우저가 알림을 지원하는지 확인
         if (!('Notification' in window)) {
           console.log("이 브라우저는 알림을 지원하지 않습니다.");
         } else {
-          if (checkNotificationPromise()) {
+          if(checkNotificationPromise()) {
             Notification.requestPermission()
-              .then((permission) => {
-                handlePermission(permission);
-              })
+            .then((permission) => {
+              handlePermission(permission);
+            })
           } else {
-            Notification.requestPermission(function (permission) {
+            Notification.requestPermission(function(permission) {
               handlePermission(permission);
             });
           }
         }
       }
-    </script>
 
-    <script>
+      /*
       function notifyMe() {
         // Let's check if the browser supports notifications
         if (!("Notification" in window)) {
@@ -365,6 +359,7 @@
         // At last, if the user has denied notifications, and you 
         // want to be respectful there is no need to bother them any more.
       }
+      */
     </script>
 
 </body>
