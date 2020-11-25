@@ -1,13 +1,11 @@
 .btn-kakao {
     color: #fff;
     background-color: #ffcd36;
-    border-color: #fff
 }
 
 .btn-kakao:hover {
     color: #fff;
-    background-color: #fcc626;
-    border-color: #e6e6e6
+    background-color: #ffbf00;
 }
 
 .btn-kakao.focus,

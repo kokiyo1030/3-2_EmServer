@@ -1,5 +1,14 @@
 #progressBarContainer {
-    margin: 20px;
-    width: 200px;
-    height: 100px;
-  }
+  margin: 20px;
+  width: 400px;
+  height: 200px;
+}
+
+.progressBarContainer2 {
+  height: 300px;
+}
+
+.progressBarContainer2>svg {
+  height: 100%;
+  display: block;
+}

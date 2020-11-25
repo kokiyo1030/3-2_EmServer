@@ -4,7 +4,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">축사 선택</h1>
+    <h1 class="h3 mb-4 text-white-800">축사 선택</h1>
 
 </div>
 <div id="map" style="width:100%;height:80%;position:relative;overflow:hidden;"></div>
@@ -20,10 +20,10 @@
 
     //컨트롤 부
     var mapTypeControl = new kakao.maps.MapTypeControl();
-    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPLEFT);
     map.setZoomable(false);
     var zoomControl = new kakao.maps.ZoomControl();
-    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+    map.addControl(zoomControl, kakao.maps.ControlPosition.LEFT);
 
     // 지도에 마커를 표시합니다 
     var marker = new kakao.maps.Marker({

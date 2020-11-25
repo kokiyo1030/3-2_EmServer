@@ -127,4 +127,8 @@ router.get('/map2', (req, res) => {
     res.render('map2', { title: '중부리 2축사' });
 });
 
+router.get('/control/map1', (req, res) => {
+    res.render('control', { title: '제어하기' });
+});
+
 module.exports = router;
