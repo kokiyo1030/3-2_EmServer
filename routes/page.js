@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Zone, User } = require('../models');
+const { Zone, User, Weight } = require('../models');
 
 const router = express.Router();
 
@@ -112,10 +112,14 @@ router.get('/map1', async (req, res, next) => {
             ppmResult = ppm / count + 1;
             MppmResult = Mppm / count + 1;
         }
+        const weight = await Weight.findAll({
+            limit: 1
+        });
         res.render('map1', {
             title: '내 축사',
             ppm: ppmResult,
-            Mppm : MppmResult
+            Mppm: MppmResult,
+            // weight: weight
         });
     } catch (error) {
         console.error(error);
