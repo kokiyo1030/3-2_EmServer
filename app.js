@@ -7,13 +7,14 @@ const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const passport = require('passport');
 
-const app = express().get('/', async(req, res) => {
-    if (req.query.key !== process.env.KEY) {
-        res.sendStatus(403);
-        return;
-    }
-    await getFtpFile(req, res)
-});
+const app = express();
+// const app = express().get('/', async(req, res) => {
+//     if (req.query.key !== process.env.KEY) {
+//         res.sendStatus(403);
+//         return;
+//     }
+//     await getFtpFile(req, res)
+// });
 dotenv.config();
 const pageRouter = require('./routes/page');
 const userRouter = require('./routes/user');
@@ -47,20 +48,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-const sessionOption = {
+// const sessionOption = {
+//     resave: false,
+//     saveUninitialized: false,
+//     secret: process.env.COOKIE_SECRET,
+//     cookie: {
+//         httpOnly: true,
+//         secure: false
+//     },
+// };
+// if (process.env.NODE_ENV === 'production') {
+//     sessionOption.proxy = true;
+//     sessionOption.cookie.secure = true;
+// }
+app.use(session({
     resave: false,
     saveUninitialized: false,
     secret: process.env.COOKIE_SECRET,
     cookie: {
         httpOnly: true,
         secure: false
-    },
-};
-if (process.env.NODE_ENV === 'production') {
-    sessionOption.proxy = true;
-    sessionOption.cookie.secure = true;
-}
-app.use(session(sessionOption));
+    }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
