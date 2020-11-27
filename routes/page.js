@@ -1,6 +1,7 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Zone, User, Weight } = require('../models');
+const { Zone, User, Weight, sequelize } = require('../models');
+const { QueryTypes, Sequelize } = require('sequelize');
 
 const router = express.Router();
 
@@ -112,14 +113,53 @@ router.get('/map1', async (req, res, next) => {
             ppmResult = ppm / count + 1;
             MppmResult = Mppm / count + 1;
         }
-        const weight = await Weight.findAll({
-            limit: 1
+        // const weight = await sequelize.query("SELECT weight from weights order by id desc limit 1;", { type: QueryTypes.SELECT });
+        const DBweight = await Weight.findAll({
+            limit: 1,
+            order: [
+                ['id', 'DESC']
+            ]
         });
+        var floatWeight = 0;
+        floatWeight = DBweight.weight;
+        console.log(floatWeight);
+        console.log(typeof(floatWeight));
+        console.log(ppmResult);
+        console.log(typeof(ppmResult));
+        // if ( weight >= 0 && weight < 5 ) {
+        //     res.render('map1', {
+        //         title: '내 축사',
+        //         ppm: ppmResult,
+        //         Mppm: MppmResult,
+        //         zeroWeight: weight
+        //     });
+        // } else if ( weight >= 5 && weight < 10 ) {
+        //     res.render('map1', {
+        //         title: '내 축사',
+        //         ppm: ppmResult,
+        //         Mppm: MppmResult,
+        //         fiveWeight: weight
+        //     });
+        // } else if (weight >= 10 && weigh < 15 ) {
+        //     res.render('map1', {
+        //         title: '내 축사',
+        //         ppm: ppmResult,
+        //         Mppm: MppmResult,
+        //         tenWeight: weight
+        //     });
+        // } else if (weight >= 15) {
+        //     res.render('map1', {
+        //         title: '내 축사',
+        //         ppm: ppmResult,
+        //         Mppm: MppmResult,
+        //         fullWeight: weight
+        //     });
+        // }
         res.render('map1', {
             title: '내 축사',
             ppm: ppmResult,
             Mppm: MppmResult,
-            // weight: weight
+            weight: floatWeight
         });
     } catch (error) {
         console.error(error);

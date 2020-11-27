@@ -1,20 +1,8 @@
 const Sequelize = require('sequelize');
 
-module.exports = class Zone extends Sequelize.Model {
+module.exports = class Control extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
-            VRL: {
-                type: Sequelize.FLOAT(10),
-                allowNull: false
-            },
-            ppm: {
-                type: Sequelize.FLOAT(10),
-                allowNull: false
-            },
-            Mppm: {
-                type: Sequelize.FLOAT(10),
-                allowNull: false
-            },
             control: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -28,14 +16,13 @@ module.exports = class Zone extends Sequelize.Model {
             sequelize,
             timestamps: false,
             underscored: false,
-            modelName: 'Zone',
-            tableName: 'zones',
+            modelName: 'Control',
+            tableName: 'controls',
             paranoid: false,
             charset: 'utf8',
             collate: 'utf8_general_ci'
         });
     }
     static associate(db) {
-        db.Zone.belongsTo(db.User);
     }
 };
