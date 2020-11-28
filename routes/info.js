@@ -25,41 +25,6 @@ router.post('/postgas', (req, res, next) => {
         })
 });
 
-router.post('/postcontrol', (req, res, next) => {
-    const control = req.body.control;
-    const date = Date.now();
-
-    Control.create({
-            control: control,
-            CreatedAt: date
-        })
-        .then(result => {
-            res.status(201).json(result);
-        })
-        .catch(err => {
-            next(err);
-        })
-});
-
-router.get("/getcontrol", async (req, res, next) => {
-    try {
-        const control = await Control.findAll({
-            limit: 1,
-            order: [
-                ['id', 'DESC']
-            ]
-        });
-        res.render('getcontrol', {
-            title: '컨트롤',
-            control: control.control
-        });
-    }
-    catch (error) {
-        console.error(error);
-        next(error);
-    }
-});
-
 router.post('/postweight', (req, res, next) => {
     const weight = req.body.kg;
     const temp = req.body.Temp;
@@ -76,6 +41,54 @@ router.post('/postweight', (req, res, next) => {
         .catch(err => {
             next(err);
         })
+});
+
+router.post('/control', (req, res, next) => {
+    const control = req.body.control;
+    const date = Date.now();
+
+    Control.create({
+            control: control,
+            CreatedAt: date
+        })
+        .then(result => {
+            // res.status(201).json(result);
+            res.redirect('/info/control');
+        })
+        .catch(err => {
+            next(err);
+        })
+});
+
+router.get("/control", async (req, res, next) => {
+    try {
+        res.render('control', {
+            title: '컨트롤'
+        });
+    }
+    catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+router.get('/getcontrol', async(req, res, next) => {
+    try {
+        const control = await Control.findAll({
+            limit: 1,
+            order: [
+                ['id', 'desc']
+            ]
+        })
+        res.render('getcontrol', {
+            title: 'json보기',
+            control: control[0].control
+        })
+    }
+    catch (error) {
+        console.error(error);
+        next(error);
+    }
 });
 
 module.exports = router;

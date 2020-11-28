@@ -5,7 +5,7 @@ module.exports = class Weight extends Sequelize.Model {
         return super.init({
             weight: {
                 type: Sequelize.FLOAT(10),
-                allowNull: true
+                allowNull: false
             },
             temp: {
                 type: Sequelize.FLOAT(10),

@@ -4,7 +4,7 @@ module.exports = class Control extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
             control: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING,
                 allowNull: false,
                 defaultValue: 0
             },
@@ -23,6 +23,5 @@ module.exports = class Control extends Sequelize.Model {
             collate: 'utf8_general_ci'
         });
     }
-    static associate(db) {
-    }
+    static associate(db) {}
 };

@@ -13,14 +13,6 @@
 <script src="/main.js"></script>
 <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $("button").click(function () {
-            $.get("/map1/" + $(this).attr('id'), function (data, status) {});
-        });
-    });
-</script>
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -112,26 +104,13 @@
                     <h6 class="m-0 font-weight-bold text-primary">버튼 조작해 주세영</h6>
                 </div>
                 <div class="card-body">
-                        <button type="button" id="1" class="btn btn-success btn-icon-split btn-lg">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-check"></i>
-                            </span>
-                            <span class="text">EM용액 뿌리기</span>
-                        </button>
-                        <div class="my-2"></div>
-                        <button type="button" id="0" href="/auth/postcontrol" class="btn btn-danger btn-icon-split btn-lg">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </span>
-                            <span class="text">EM용액 뿌리기 중단</span>
-                        </button>
                     <a href="#" class="btn btn-success btn-icon-split btn-lg" onclick="calculate()">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
                         </span>
                         <span class="text">노티테스트</span>
                     </a>
-                    <a href="/control/map1" class="btn btn-success btn-icon-split btn-lg" onclick="calculate()">
+                    <a href="/info/control" class="btn btn-success btn-icon-split btn-lg" onclick="calculate()">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
                         </span>
@@ -139,15 +118,6 @@
                     </a>
                     <div class="my-2"></div>
                     <div style="align-items: center;">
-                        <!-- {% if zeroWeight %} -->
-                        <!-- <img src="../img/RefuelStation.png" style="width: 8em; height: 10em"> -->
-                        <!-- {% elif fiveWeight %} -->
-                        <!-- <img src="../img/주유.jpg" style="width: 8em; height: 10em"> -->
-                        <!-- {% elif tenWeight %} -->
-                        <!-- <img src="../img/호와구의술.jpg" style="width: 8em; height: 10em"> -->
-                        <!-- {% elif fullWeight %} -->
-                        <!-- <img src="../img/farm.png" style="width: 8em; height: 10em"> -->
-                        <!-- {% endif %} -->
                         {% if (weight >= 0) and (weight < 5) %}
                         <img src="../img/RefuelStation.png" style="width: 8em; height: 10em">
                         {% elif (weight >= 5) and (weight < 10) %}
@@ -157,7 +127,6 @@
                         {% elif (weight >= 15) %}
                         <img src="../img/farm.png" style="width: 8em; height: 10em">
                         {% endif %}
-                        <span>{{weight}}</span>
                         <a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=em%EC%9A%A9%EC%95%A1"
                             target="_blank" class="btn btn-primary btn-icon-split btn-lg">
                             <span class="icon text-white-50">
