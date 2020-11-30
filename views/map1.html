@@ -8,10 +8,14 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!-- 프로그레스 스크립트/CSS -->
-<link rel="stylesheet" href="/css/progress.css">
-<script src="js/script.js"></script>
-<script src="/main.js"></script>
-<script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+<style>
+    #progressBarContainer {
+        margin: 20px;
+        width: 400px;
+        height: 100px;
+      }
+</style>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -156,8 +160,18 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">프로그레스바</h6>
                 </div>
-                <!-- <div id="progressBarContainer"></div> -->
-                <div class="progressBarContainer2" id="progressBarContainer2"></div>
+                <div id="progressBarContainer"></div>
+            </div>
+        </div>
+
+        <div class="col-xl-5 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">BS프로그레스바</h6>
+                </div>
+                <div class="progress">
+                    <div class="ldBar" data-preset="bubble" data-pattern-size="64" data-fill="/cloud.svg" style="width:200px;height:200px"></div>
+                </div>
             </div>
         </div>
 
@@ -260,6 +274,46 @@
           }]
      });
      chart.render();
+</script>
+
+<!-- 프로그레스 스크립트 -->
+<script>
+    var bar = new ProgressBar.SemiCircle('#progressBarContainer', {
+        strokeWidth: 5,
+        color: '#89FF82',
+        trailColor: '#eee',
+        trailWidth: 5,
+        easing: 'easeInOut',
+        duration: 1800,
+        svgStyle: null,
+        text: {
+          value: '',
+          alignToBottom: false
+        },
+        from: {
+          color: '#89FF82'
+        },
+        to: {
+          color: '#ED6A5A'
+        },
+        // Set default step function for all animate calls
+        step: (state, bar) => {
+          bar.path.setAttribute('stroke', state.color);
+          var value = Math.round(bar.value() * 100);
+          if (value === 0) {
+            bar.setText('');
+          } else {
+            bar.setText(value);
+          }
+      
+          bar.text.style.color = state.color;
+        }
+      });
+      bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+      bar.text.style.fontSize = '2rem';
+      
+      bar.animate(1.0); // Number from 0.0 to 1.0
+      
 </script>
 
 
