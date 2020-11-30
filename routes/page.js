@@ -91,6 +91,10 @@ router.get('/forgot-password', (req, res) => {
 });
 
 router.get('/map1', async (req, res, next) => {
+    var sumPpm = 0;
+    var sumMppm = 0;
+    var ppmResult = 0;
+    var MppmResult = 0;
     try {
         const sensor = await Zone.findAll({
             where: {
@@ -103,34 +107,30 @@ router.get('/map1', async (req, res, next) => {
             }
         })
         for(i=0; i<count; i++) {
-            var ppm = 0;
-            var Mppm = 0;
-            var ppmResult = 0;
-            var MppmResult = 0;
-            ppm += sensor[i].ppm;
-            Mppm += sensor[i].Mppm;
-            ppmResult = ppm / count + 1;
-            MppmResult = Mppm / count + 1;
+            sumPpm += sensor[i].ppm;
+            sumMppm += sensor[i].Mppm;
+            ppmResult = sumPpm / count;
+            MppmResult = sumMppm / count;
         }
-
         const weightTemp = await Weight.findAll({
             limit: 1,
             order: [
                 ['id', 'DESC']
             ]
         });
-        const chart = Zone.findAll({
-            limit: 12,
+        const chart = await Zone.findAll({
+            limit: 7,
             order: [
               ['id', 'desc']
             ]
-          });
+        });
         res.render('map1', {
             title: '내 축사',
-            ppm: ppmResult,
-            Mppm: MppmResult,
+            ppm: ppmResult.toFixed(2),
+            Mppm: MppmResult.toFixed(2),
             weight: weightTemp[0].weight,
-            temp: weightTemp[0].temp
+            temp: weightTemp[0].temp,
+            chart: chart
         });
     } catch (error) {
         console.error(error);
