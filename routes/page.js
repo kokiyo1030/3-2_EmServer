@@ -1,6 +1,8 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Zone, User, Weight } = require('../models');
+const { Zone, User, Weight, Temp } = require('../models');
+const request = require('request');
+var parseString = require('xml2js').parseString;
 
 const router = express.Router();
 
@@ -96,6 +98,11 @@ router.get('/map1', async (req, res, next) => {
     var ppmResult = 0;
     var MppmResult = 0;
     try {
+        // request('http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4128157500', function (error, response, body) {
+        //     parseString(body, function (err, result) {
+        //         parseData = result;
+        //     });
+        // });
         const sensor = await Zone.findAll({
             where: {
                 CreatedAt: Date.now()
@@ -112,7 +119,13 @@ router.get('/map1', async (req, res, next) => {
             ppmResult = sumPpm / count;
             MppmResult = sumMppm / count;
         }
-        const weightTemp = await Weight.findAll({
+        const weight = await Weight.findAll({
+            limit: 1,
+            order: [
+                ['id', 'DESC']
+            ]
+        });
+        const temp = await Temp.findAll({
             limit: 1,
             order: [
                 ['id', 'DESC']
@@ -128,14 +141,28 @@ router.get('/map1', async (req, res, next) => {
             title: '내 축사',
             ppm: ppmResult.toFixed(2),
             Mppm: MppmResult.toFixed(2),
-            weight: weightTemp[0].weight,
-            temp: weightTemp[0].temp,
+            weight: weight[0].weight,
+            temp: temp[0].temp,
             chart: chart
         });
     } catch (error) {
         console.error(error);
         next(error);
     }
+});
+
+router.get('/map1', (req, res, next) => {
+    request('http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4128157500', function (error, response, body) {
+        parseString(body, function (err, result) {
+            const parseData = result;
+            const windP = parseData.rss.channel[0].item[0].description[0].body[0].data[0].wd[0];
+            const windD = parseData.rss.channel[0].item[0].description[0].body[0].data[0].wdKor[0];
+        });
+    });
+    res.render('map1', {
+        windP: windP,
+        windD: windD
+    });
 });
 
 router.get('/map2', (req, res) => {

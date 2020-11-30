@@ -2,6 +2,7 @@ const express = require('express');
 const Sensor = require('../models/zone');
 const Weight = require('../models/weight');
 const Control = require('../models/control');
+const Temp = require('../models/temp');
 
 const router = express.Router();
 
@@ -27,11 +28,25 @@ router.post('/postgas', (req, res, next) => {
 
 router.post('/postweight', (req, res, next) => {
     const weight = req.body.kg;
-    const temp = req.body.Temp;
     const date = Date.now();
 
     Weight.create({
             weight: weight,
+            CreatedAt: date
+        })
+        .then(result => {
+            res.status(201).json(result);
+        })
+        .catch(err => {
+            next(err);
+        })
+});
+
+router.post('/posttemp', (req, res, next) => {
+    const temp = req.body.Temp;
+    const date = Date.now();
+
+    Temp.create({
             temp: temp,
             CreatedAt: date
         })
