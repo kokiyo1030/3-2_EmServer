@@ -17,15 +17,8 @@ router.get('/profile', isLoggedIn, (req, res) => {
 
 router.get('/', async (req, res, next) => {
     try {
-        const sensor = await Zone.findAll({
-            limit: 1,
-            order: [
-                ['id', 'DESC']
-            ]
-        });
         res.render('main', {
             title: '축사 관리',
-            sensor: sensor[0].ppm
         });
     } catch (err) {
         console.error(err);

@@ -8,13 +8,6 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 
 const app = express();
-// const app = express().get('/', async(req, res) => {
-//     if (req.query.key !== process.env.KEY) {
-//         res.sendStatus(403);
-//         return;
-//     }
-//     await getFtpFile(req, res)
-// });
 dotenv.config();
 const pageRouter = require('./routes/page');
 const userRouter = require('./routes/user');
