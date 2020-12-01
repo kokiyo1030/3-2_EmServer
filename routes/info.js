@@ -43,7 +43,7 @@ router.post('/postweight', (req, res, next) => {
 });
 
 router.post('/posttemp', (req, res, next) => {
-    const temp = req.body.Temp;
+    const temp = req.body.temp;
     const date = Date.now();
 
     Temp.create({
