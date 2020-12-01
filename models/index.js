@@ -27,7 +27,6 @@ Temp.init(sequelize);
 
 User.associate(db);
 Zone.associate(db);
-Weight.associate(db);
 Temp.associate(db);
 
 module.exports = db;

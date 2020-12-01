@@ -23,6 +23,5 @@ module.exports = class Weight extends Sequelize.Model {
         });
     }
     static associate(db) {
-        db.Weight.belongsTo(db.User);
     }
 };

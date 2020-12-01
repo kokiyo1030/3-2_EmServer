@@ -23,6 +23,7 @@
         font-size: 0.6em;
       }
 </style>
+</style>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -131,7 +132,7 @@
                             <span class="text">EM용액 주문하기</span>
                         </a>
                     <div style="align-items: center;">
-                        {% if (weight >= 0) and (weight < 5) %}
+                        {% if (weight >= -5) and (weight < 5) %}
                         <div class="ldBar label-center" data-max="20" data-value="2.5" 
                             data-preset="bubble" data-pattern-size="64" style="width: 200px; height: 200px;">
                         </div>
@@ -297,5 +298,11 @@
 <!-- 프로그레스 스크립트 -->
 <script>
     var bar = new ldBar(".ldBar", {});
+</script>
+<script>
+    var bar = new ldBar(".ldBarPPM", {});
+</script>
+<script>
+    var bar = new ldBar(".ldBarMPPM", {});
 </script>
 {% endblock %}

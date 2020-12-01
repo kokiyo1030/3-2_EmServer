@@ -17,16 +17,15 @@ router.get('/profile', isLoggedIn, (req, res) => {
 
 router.get('/', async (req, res, next) => {
     try {
-        // const users = await User.findAll({
-        //     include: {
-        //         model: User,
-        //         attributes: ['email', 'nickname']
-        //     }
-        // });
+        const sensor = await Zone.findAll({
+            limit: 1,
+            order: [
+                ['id', 'DESC']
+            ]
+        });
         res.render('main', {
             title: '축사 관리',
-            // user: user
-            // zones: zones
+            sensor: sensor[0].ppm
         });
     } catch (err) {
         console.error(err);
@@ -141,7 +140,7 @@ router.get('/map1', async (req, res, next) => {
             title: '내 축사',
             ppm: ppmResult.toFixed(2),
             Mppm: MppmResult.toFixed(2),
-            weight: weight[0].weight,
+            weight: (weight[0].weight) - 3.5,
             temp: temp[0].temp,
             chart: chart
         });
