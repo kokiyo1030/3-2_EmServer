@@ -45,7 +45,7 @@ router.post('/postweight', (req, res, next) => {
 router.post('/posttemp', (req, res, next) => {
     const temp = req.body.temp;
     const date = Date.now();
-    if (temp < 70) {
+    // if (temp < 70) {
         Temp.create({
             temp: temp,
             CreatedAt: date
@@ -56,7 +56,7 @@ router.post('/posttemp', (req, res, next) => {
         .catch(err => {
             next(err);
         })
-    } 
+    // } 
 });
 
 router.post('/control', (req, res, next) => {
