@@ -3,10 +3,6 @@ const Sequelize = require('sequelize');
 module.exports = class Zone extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
-            VRL: {
-                type: Sequelize.FLOAT(10),
-                allowNull: false
-            },
             ppm: {
                 type: Sequelize.FLOAT(10),
                 allowNull: false

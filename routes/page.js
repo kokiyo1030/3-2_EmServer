@@ -40,50 +40,6 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.get('/tables', (req, res) => {
-    res.render('left_nav/tables', { title : '테이블 정보' });
-});
-
-router.get('/charts', (req, res) => {
-    res.render('left_nav/charts', { title: '차트 정보' });
-});
-
-router.get('/buttons', (req, res) => {
-    res.render('left_nav/components/buttons', { title: '버튼 청보' });
-});
-
-router.get('/cards', (req, res) => {
-    res.render('left_nav/components/cards', { title: '카드 정보' });
-});
-
-router.get('/utilities-color', (req, res) => {
-    res.render('left_nav/utilities/utilities-color', { title: '색상 정보' });
-});
-
-router.get('/utilities-animation', (req, res) => {
-    res.render('left_nav/utilities/utilities-animation', { title: '애니메이션 정보' });
-});
-
-router.get('/utilities-border', (req, res) => {
-    res.render('left_nav/utilities/utilities-border', { title: '테두리 정보' });
-});
-
-router.get('/utilities-other', (req, res) => {
-    res.render('left_nav/utilities/utilities-other', { title: '기타 정보' });
-});
-
-router.get('/404', (req, res) => {
-    res.render('left_nav/pages/404', { title: '404Error' });
-});
-
-router.get('/blank', (req, res) => {
-    res.render('left_nav/pages/blank', { title: 'Blank Page' });
-});
-
-router.get('/forgot-password', (req, res) => {
-    res.render('left_nav/pages/forgot-password', { title: 'forgotPassword' });
-});
-
 router.get('/map1', async (req, res, next) => {
     var sumPpm = 0;
     var sumMppm = 0;
@@ -159,6 +115,50 @@ router.get('/map1', (req, res, next) => {
 
 router.get('/map2', (req, res) => {
     res.render('map2', { title: '중부리 2축사' });
+});
+
+router.get('/tables', (req, res) => {
+    res.render('left_nav/tables', { title : '테이블 정보' });
+});
+
+router.get('/charts', (req, res) => {
+    res.render('left_nav/charts', { title: '차트 정보' });
+});
+
+router.get('/buttons', (req, res) => {
+    res.render('left_nav/components/buttons', { title: '버튼 청보' });
+});
+
+router.get('/cards', (req, res) => {
+    res.render('left_nav/components/cards', { title: '카드 정보' });
+});
+
+router.get('/utilities-color', (req, res) => {
+    res.render('left_nav/utilities/utilities-color', { title: '색상 정보' });
+});
+
+router.get('/utilities-animation', (req, res) => {
+    res.render('left_nav/utilities/utilities-animation', { title: '애니메이션 정보' });
+});
+
+router.get('/utilities-border', (req, res) => {
+    res.render('left_nav/utilities/utilities-border', { title: '테두리 정보' });
+});
+
+router.get('/utilities-other', (req, res) => {
+    res.render('left_nav/utilities/utilities-other', { title: '기타 정보' });
+});
+
+router.get('/404', (req, res) => {
+    res.render('left_nav/pages/404', { title: '404Error' });
+});
+
+router.get('/blank', (req, res) => {
+    res.render('left_nav/pages/blank', { title: 'Blank Page' });
+});
+
+router.get('/forgot-password', (req, res) => {
+    res.render('left_nav/pages/forgot-password', { title: 'forgotPassword' });
 });
 
 module.exports = router;
