@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Zone, User, Weight, Temp } = require('../models');
+const { Zone, Zone2, User, Weight, Temp } = require('../models');
 const request = require('request');
 var parseString = require('xml2js').parseString;
 
@@ -89,7 +89,7 @@ router.get('/map1', async (req, res, next) => {
             title: '내 축사',
             ppm: ppmResult.toFixed(2),
             Mppm: MppmResult.toFixed(2),
-            weight: (weight[0].weight) - 3.5,
+            weight: weight[0].weight,
             temp: temp[0].temp,
             chart: chart
         });
@@ -99,22 +99,67 @@ router.get('/map1', async (req, res, next) => {
     }
 });
 
-router.get('/map1', (req, res, next) => {
-    request('http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4128157500', function (error, response, body) {
-        parseString(body, function (err, result) {
-            const parseData = result;
-            const windP = parseData.rss.channel[0].item[0].description[0].body[0].data[0].wd[0];
-            const windD = parseData.rss.channel[0].item[0].description[0].body[0].data[0].wdKor[0];
-        });
-    });
-    res.render('map1', {
-        windP: windP,
-        windD: windD
-    });
-});
+// router.get('/map1', (req, res, next) => {
+//     request('http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4128157500', function (error, response, body) {
+//         parseString(body, function (err, result) {
+//             const parseData = result;
+//             const windP = parseData.rss.channel[0].item[0].description[0].body[0].data[0].wd[0];
+//             const windD = parseData.rss.channel[0].item[0].description[0].body[0].data[0].wdKor[0];
+//         });
+//     });
+//     res.render('map1', {
+//         windP: windP,
+//         windD: windD
+//     });
+// });
 
-router.get('/map2', (req, res) => {
-    res.render('map2', { title: '중부리 2축사' });
+router.get('/map2', async (req, res, next) => {
+    var sumPpm = 0;
+    var ppmResult = 0;
+    try {
+        const sensor = await Zone2.findAll({
+            where: {
+                CreatedAt: Date.now()
+            }
+        });
+        const count = await Zone2.count({
+            where: {
+                CreatedAt: Date.now()
+            }
+        })
+        for(i=0; i<count; i++) {
+            sumPpm += sensor[i].ppm;
+            ppmResult = sumPpm / count;
+        }
+        const weight = await Weight.findAll({
+            limit: 1,
+            order: [
+                ['id', 'DESC']
+            ]
+        });
+        const temp = await Temp.findAll({
+            limit: 1,
+            order: [
+                ['id', 'DESC']
+            ]
+        });
+        const chart = await Zone2.findAll({
+            limit: 7,
+            order: [
+              ['id', 'DESC']
+            ]
+        });
+        res.render('map2', {
+            title: '내 축사',
+            ppm: ppmResult.toFixed(2),
+            weight: weight[0].weight,
+            temp: temp[0].temp,
+            chart: chart
+        });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 });
 
 router.get('/tables', (req, res) => {

@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 
-module.exports = class Weight extends Sequelize.Model {
+module.exports = class Zone extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      weight: {
+      ppm: {
         type: Sequelize.FLOAT(10),
         allowNull: false
       },
@@ -15,8 +15,8 @@ module.exports = class Weight extends Sequelize.Model {
       sequelize,
       timestamps: false,
       underscored: false,
-      modelName: 'Weight',
-      tableName: 'weights',
+      modelName: 'Zone2',
+      tableName: 'zones',
       paranoid: false,
       charset: 'utf8',
       collate: 'utf8_general_ci'
