@@ -16,10 +16,10 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize;
 db.User = User;
 db.Zone = Zone;
+db.Zone2 = Zone2
 db.Weight = Weight;
 db.Control = Control;
 db.Temp = Temp;
-db.Zone2 = Zone2
 
 User.init(sequelize);
 Zone.init(sequelize);

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = class Zone extends Sequelize.Model {
+module.exports = class Zone2 extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
       ppm: {
@@ -16,7 +16,7 @@ module.exports = class Zone extends Sequelize.Model {
       timestamps: false,
       underscored: false,
       modelName: 'Zone2',
-      tableName: 'zones',
+      tableName: 'zones2',
       paranoid: false,
       charset: 'utf8',
       collate: 'utf8_general_ci'
