@@ -26,20 +26,20 @@ router.post('/postgas', (req, res, next) => {
 });
 
 router.post('/postgas2', (req, res, next) => {
-    const ppm = req.body.ppm;
-    const date = Date.now();
-  
-    Sensor2.create({
-        ppm: ppm,
-        CreatedAt: date
-      })
-      .then(result => {
-        res.status(201).json(result);
-      })
-      .catch(err => {
-        next(err);
-      })
-  });
+  const ppm = req.body.ppm;
+  const date = Date.now();
+
+  Sensor2.create({
+      ppm: ppm,
+      CreatedAt: date
+    })
+    .then(result => {
+      res.status(201).json(result);
+    })
+    .catch(err => {
+      next(err);
+    })
+});
 
 router.post('/postweight', (req, res, next) => {
   const weight = req.body.kg;
